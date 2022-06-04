@@ -1,2 +1,2 @@
 # MovieRecommendation
-Project for AI(Artificial Intelegence)
+Project for AI (Artificial Intelegence)
