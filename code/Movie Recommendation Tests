@@ -148,7 +148,7 @@ def get_recommendations(title, cosine_sim=cosine_sim):
 
     movies_indices = [ind[0] for ind in sim_scores]
     movies = movies_df["title"].iloc[movies_indices]
-    return movies
+    return movies.values
 
 
 # In[15]:
@@ -275,30 +275,13 @@ print(get_recommendations("The Avengers", cosine_sim2))
 
 # In[ ]:
 from tkinter import *
-from tkinter import ttk
+from tkinter import messagebox
+from tkinter import simpledialog
 
-# Create an instance of tkinter frame
-win=Tk()
+root=Tk()
 
-# Set the geometry
-win.geometry("700x350")
 
-def outputDef():
-    label = Label(win)
-    label.config(text=""+ get_recommendations(text.get(1.0, "end"), cosine_sim2))
+userInput = simpledialog.askstring("Movie","Type in a movie that you want recommendation for.")
+answer = "\n".join(get_recommendations(userInput, cosine_sim2))
 
-# Add a text widget
-text=Text(win, width=80, height=15)
-text.insert(END, "")
-text.pack()
-
-# Create a button to get the text input
-b=ttk.Button(win, text="Print", command=outputDef())
-b.pack()
-
-# Create a Label widget
-label=Label(win, text="", font=('Calibri 15'))
-label.pack()
-
-win.mainloop()
-
+messagebox.showinfo("result", answer)
