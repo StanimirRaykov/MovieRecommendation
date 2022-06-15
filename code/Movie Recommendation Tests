@@ -6,6 +6,7 @@
 # In[1]:
 
 
+from matplotlib.ft2font import BOLD
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -247,6 +248,7 @@ from tkinter import *
 from tkinter import messagebox
 root = Tk()
 root.geometry("350x400")
+root.configure(bg="#009f92")
 root.resizable(width=False, height=False)
 root.title("Movie Recommendation")
  
@@ -264,26 +266,26 @@ def Take_input():
         messagebox.showerror("Wrong input", "Please enter a valid name!")
 
     
-l = Label(text = "Insert Movie Name")
+l = Label(text = "Insert Movie Name", bg="#009f92", fg = "black", font  = 'bold')
 inputtxt = Text(root, wrap = NONE ,height = 2,
                 width = 35,
-                bg = "light yellow")
-l1 = Label(text = "")
+                bg = "#f7e7be", borderwidth=1, relief="solid")
+l1 = Label(text = "",bg="#009f92")
 Output = Text(root, height = 10,
               width = 35,
-              bg = "light cyan")
+              bg = "#f7e7be", borderwidth=1, relief="solid")
 
 
-Display = Button(root, height = 2,
-                 width = 40,
+Display = Button(root, height = 2, bg="#005366", fg ="#f7e7be", activebackground="#003E4D",
+                 width = 39,
                  text ="Recommend",
                  command = lambda:Take_input())
-l2 = Label(text = "")
-show_plot = Button(root, height = 2,
-                 width = 40,
+l2 = Label(text = "",bg="#009f92")
+show_plot = Button(root, bg="#005366", height = 2, fg = "#f7e7be", activebackground="#003E4D",
+                 width = 39,
                  text ="Show Top 10 Movies",
                  command = lambda:plot())
-l3 = Label(text = "")
+l3 = Label(text = "",bg="#009f92")
 l.pack()
 inputtxt.pack()
 l1.pack()
