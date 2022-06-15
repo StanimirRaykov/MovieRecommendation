@@ -1,10 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# ## Movie Recommendation System
-
+#Movie recommendataion project
 # In[1]:
-
 
 import numpy as np
 import pandas as pd
@@ -15,43 +10,43 @@ from sklearn.metrics.pairwise import linear_kernel
 from sklearn.metrics.pairwise import cosine_similarity
 from ast import literal_eval
 
-
 # In[2]:
-
-
+"""
+Load the data using pandas
+"""
 
 credits_df = pd.read_csv("tmdb_5000_credits.csv")
 movies_df = pd.read_csv("tmdb_5000_movies.csv")
 
-
+"""
+return the top n rows of the movie dataframe
+"""
 # In[3]:
-
-
 movies_df.head()
 
-
+"""
+return the top n rows of the credits dataframe
+"""
 # In[4]:
-
-
 credits_df.head()
 
-
+"""
+Merge the two dataframes into one on id
+"""
 # In[5]:
-
-
 credits_df.columns = ['id','tittle','cast','crew']
 movies_df = movies_df.merge(credits_df, on="id")
 
 
 # In[6]:
-
-
+"""
+return the top n rows of the movie dataframe
+"""
 movies_df.head()
 
 
 # In[7]:
-
-
+#?
 # Demographic Filtering
 C = movies_df["vote_average"].mean()
 m = movies_df["vote_count"].quantile(0.9)
@@ -64,8 +59,7 @@ print(new_movies_df.shape)
 
 
 # In[8]:
-
-
+#?
 def weighted_rating(x, C=C, m=m):
     v = x["vote_count"]
     R = x["vote_average"]
@@ -74,18 +68,17 @@ def weighted_rating(x, C=C, m=m):
 
 
 # In[9]:
-
-
+#?
 new_movies_df["score"] = new_movies_df.apply(weighted_rating, axis=1)
 new_movies_df = new_movies_df.sort_values('score', ascending=False)
 
 new_movies_df[["title", "vote_count", "vote_average", "score"]].head(10)
 
-
 # In[10]:
 
-
-# Plot top 10 movies
+"""
+Plot the top 10 movies
+"""
 def plot():
     popularity = movies_df.sort_values("popularity", ascending=False)
     plt.figure(figsize=(12, 6))
@@ -98,16 +91,11 @@ def plot():
 
 plot()
 
-
 # In[11]:
-
-
 # Content based Filtering
 print(movies_df["overview"].head(5))
 
-
 # In[12]:
-
 
 tfidf = TfidfVectorizer(stop_words="english")
 movies_df["overview"] = movies_df["overview"].fillna("")
